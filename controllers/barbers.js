@@ -26,6 +26,23 @@ router.get('/:id', (req,res) => {
     })
 })
 
+router.post('/:id', (req,res) => {
+    db.appointment.findOne({barberId: req.params.id})
+    .then(appointment => {
+        if (appointment) {
+           db.appointment.findByIdAndUpdate({_id: appointment._id})
+           .then(updatedAppointment => {
+               res.send({updatedAppointment})
+           }) 
+        } else {
+            db.appointment.create(req.body)
+            .then(appt => {
+                res.send({appt})
+            })
+        }
+    })
+})
+
 
 //export
 module.exports = router;
