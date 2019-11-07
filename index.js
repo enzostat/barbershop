@@ -10,7 +10,7 @@ let app = express()
 
 
 //Controllers
-
+app.use('/barbers', require('./controllers/barbers'))
 
 //Routes
 app.get('*', (req,res) => {

@@ -43,6 +43,17 @@ router.post('/:id', (req,res) => {
     })
 })
 
+router.put('/:id', (req, res) => {
+    db.appointment.findOneAndUpdate({barberId: req.params.id}, req.body, {new: true})
+    .then(editedAppt => {
+        res.send({editedAppt})
+    })
+    .catch(err => {
+        console.log('There was an error in your put route: ', err)
+        res.send({message: 'Something went wrong'})
+    })
+})
+
 
 //export
 module.exports = router;
